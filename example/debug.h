@@ -15,7 +15,6 @@
  
 #define VERBUM_DEBUG_SERVER_PORT            1337
 #define VERBUM_DEBUG_R_ADDRESS              "127.0.0.1"
-#define VERBUM_DEBUG_CONNECTION_TIMEOUT     1
 
 #define lib_debug_print_internal(DEBUG_FLAG, FMT, ...)                      \
     do {                                                                    \
