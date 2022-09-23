@@ -23,6 +23,20 @@ $(document).ready(() => {
 
     } else 
         alert('Sorry, no Web Worker support.');
+
+    // ***
+    for (var a=0; a<100; a++) {
+        var item =
+        `
+            <div class="row" >
+                <div class="col-md-12" >
+                Item `+ a +`
+                </div>
+            </div>
+        `;
+
+        $('.log-content').append(item);
+    }
 });
 
 function process_worker (ev)
