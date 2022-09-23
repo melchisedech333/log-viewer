@@ -13,8 +13,8 @@ app.allowRendererProcessReuse = true;
 
 app.once('ready', () => {
   win = new BrowserWindow({
-    width: 1000,
-    height: 600,
+    width: 800,
+    height: 350,
     show: false,
     webPreferences: {
       sandbox: false,
@@ -32,7 +32,7 @@ app.once('ready', () => {
   win.setMenuBarVisibility(false)
   win.center()
   win.webContents.setUserAgent(globalUserAgent);
-  // win.webContents.openDevTools();
+  win.webContents.openDevTools();
 
   win.loadURL(url.format({
     pathname: path.join(__dirname, 'application/index.html'),

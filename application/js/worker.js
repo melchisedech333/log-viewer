@@ -1,13 +1,14 @@
 
 const net = require('net');
 
-/**
- * Worker controller.
- */
-
 onmessage = function(ev) {
-    // var request = ev.data;
-    // if (request.cmd == 'check-connection') {}
+    var request = ev.data;
+    request.status = false;
+
+    if (request.cmd == 'start-server') {
+        request.status = true;
+        postMessage(request);
+    }
 };
 
 
