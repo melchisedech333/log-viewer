@@ -1,0 +1,30 @@
+
+/**
+ * General.
+ */
+
+html, body {
+  font-size: 11px;
+  background-color: #2c3034;
+  color: white;
+  overflow: hidden;
+  user-select: none;
+}
+
+.hide-el {
+  display: none;
+}
+
+.feather-size-a {
+  width: 14px;
+  height: 14px;
+}
+
+.feather-size-b {
+  width:  8px;
+  height: 8px;
+}
+
+
+
+
