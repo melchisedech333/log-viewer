@@ -2,11 +2,12 @@
 #ifndef VERBUM_DEBUG
 #define VERBUM_DEBUG
 
-#include <stdio.h>  // sprintf
-#include <string.h> // strlen, memset
-#include <unistd.h> // sleep
-#include <time.h>   // time, localtime
-#include <stdlib.h> // malloc, free
+#include <stdio.h>      // sprintf
+#include <string.h>     // strlen, memset
+#include <unistd.h>     // sleep, getpid
+#include <time.h>       // time, localtime
+#include <stdlib.h>     // malloc, free
+#include <sys/types.h>  // pid_t
 
 /**
  * Settings.
@@ -22,6 +23,7 @@
         struct tm *tms = localtime(&now);                                   \
         char *buffer   = NULL;                                              \
         int size       = 0;                                                 \
+        pid_t pid      = getpid();                                          \
         char hour[5], min[5], sec[5];                                       \
                                                                             \
         memset(hour, 0x0, 5);                                               \
@@ -46,12 +48,12 @@
             memset(buffer, 0, size);                                        \
                                                                             \
             if (DEBUG_FLAG == 1)                                            \
-                sprintf(buffer, "[%s:%s:%s] -> %s:%d:%s(): " FMT "\n",      \
-                    hour, min, sec,                                         \
+                sprintf(buffer, "[%s:%s:%s]: %d -> %s:%d:%s(): "            \
+                    FMT "\n", hour, min, sec, (int) pid,                    \
                         __FILE__, __LINE__, __func__, ##__VA_ARGS__ );      \
             else                                                            \
-                sprintf(buffer, "[%s:%s:%s]: " FMT "\n",                    \
-                    hour, min, sec, ##__VA_ARGS__ );                        \
+                sprintf(buffer, "[%s:%s:%s]: %d -> " FMT "\n",              \
+                    hour, min, sec, (int) pid, ##__VA_ARGS__ );             \
                                                                             \
             verbum_debug_send_data(buffer);                                 \
                                                                             \
