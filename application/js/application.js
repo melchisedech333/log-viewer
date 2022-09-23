@@ -33,6 +33,8 @@ $(document).ready(() => {
     $('#btn-log-out').on('click', ()=> {
         window.interface.restart_application();
     });
+
+    auto_scroll_controller();
 });
 
 function process_worker (ev)
@@ -67,6 +69,39 @@ function process_log_data (data)
     `;
 
     $('.log-content').append(item);
+}
+
+var auto_scroll_running = false;
+var auto_scroll_enabled = true;
+
+function auto_scroll_controller ()
+{
+    $('#btn-auto-scroll').on('click', ()=> {
+        if (auto_scroll_enabled == true) {
+            auto_scroll_enabled = false;
+
+            $('#btn-auto-scroll').removeClass('btn-success');
+            $('#btn-auto-scroll').addClass('btn-danger');
+        }
+
+        else {
+            auto_scroll_enabled = true;
+
+            $('#btn-auto-scroll').addClass('btn-success');
+            $('#btn-auto-scroll').removeClass('btn-danger');
+        }
+    });
+
+    setInterval(function(){
+        if (auto_scroll_running == false) {
+            auto_scroll_running = true;
+
+            if (auto_scroll_enabled == true) 
+                window.location.href = "#log-end";
+
+            auto_scroll_running = false;
+        }
+    }, 100)
 }
 
 

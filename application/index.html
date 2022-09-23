@@ -21,7 +21,7 @@
                     <div class="top-text">Server port: <span class='server-port' >0</span></div>
                     <div class="top-text">Message counter: <span class='message-counter' >0</span></div>
 
-                    <button class='btn btn-fix-1 btn-light btn-align-1' id="btn-log-out" title="Close Node Mapper connection" >
+                    <button class='btn btn-fix-1 btn-light btn-align-1' id="btn-log-out" title="Refresh" >
                         <i class="feather-size-a" data-feather="refresh-cw"></i>
                     </button>
 
@@ -29,6 +29,10 @@
                         <i class="feather-size-a" data-feather="tool"></i>
                     </button>
                     
+                    <button class='btn btn-fix-1 btn-success btn-align-1' id="btn-auto-scroll" title="Auto-scroll" >
+                        <i class="feather-size-a" data-feather="arrow-down"></i>
+                    </button>
+
                 </div>
             </div>
         </div>
@@ -38,9 +42,11 @@
                 <div class="col-md-12" >
                     
                     <div class="log-content" ></div>
-
+                    
                 </div>
             </div>
+
+            <div id="log-end" ></div>
         </div>
 
         <!-- Libraries. -->
