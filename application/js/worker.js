@@ -19,6 +19,10 @@ onmessage = function(ev) {
         
         server.listen(port, function(){
             console.log(`Server started on port ${port}`); 
+            postMessage({
+                cmd: 'set-server-port',
+                port: port
+            })
         });
     
         request.status = true;

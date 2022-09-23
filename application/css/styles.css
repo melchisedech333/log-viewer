@@ -28,7 +28,6 @@ html, body {
   width: 100%;
   height: 30px;
   padding: 5px;
-  background-color: blue;
 }
 
 .hide-el {
@@ -73,6 +72,25 @@ html, body {
   background: #2c3034;
 }
 
+.top-text {
+  text-transform: uppercase;
+  padding-top: 5px;
+  padding-left: 10px;
+  display: inline-block;
+  font-size: 8px;
+  font-weight: bold;
+}
 
+.log-item {
+  border-top-color: #444;
+  border-top-style: solid;
+  border-top-width: 1px;
+}
+
+.log-item .text {
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
 
 

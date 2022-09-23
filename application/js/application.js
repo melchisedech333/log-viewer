@@ -4,6 +4,7 @@
  */
 
 var wk = null;
+var message_counter = 0;
 
 // Initialization.
 $(document).ready(() => {
@@ -24,28 +25,48 @@ $(document).ready(() => {
     } else 
         alert('Sorry, no Web Worker support.');
 
-    // ***
-    for (var a=0; a<100; a++) {
-        var item =
-        `
-            <div class="row" >
-                <div class="col-md-12" >
-                Item `+ a +`
-                </div>
-            </div>
-        `;
+    // Prepare toolbar buttons.
+    $('#btn-open-dev-tools').on('click', ()=> {
+        window.interface.toggle_dev_tools();
+    });
 
-        $('.log-content').append(item);
-    }
+    $('#btn-log-out').on('click', ()=> {
+        window.interface.restart_application();
+    });
 });
 
 function process_worker (ev)
 {
     var request = ev.data;
 
-    if (request.cmd == 'log-data') {
-        console.log('log data:', request.data);
+    if (request.cmd == 'set-server-port') {
+        $('.server-port').text(request.port);
     }
+
+    else if (request.cmd == 'log-data') {
+
+        // Total messages received.
+        $('.message-counter').text(message_counter);
+        message_counter++;
+        
+        process_log_data(request.data);
+    }
+}
+
+function process_log_data (data)
+{
+    var item =
+    `
+        <div class="row log-item" >
+            <div class="col-md-12" >
+                <div class="text"> 
+                    `+ data +`
+                </div>
+            </div>
+        </div>
+    `;
+
+    $('.log-content').append(item);
 }
 
 
