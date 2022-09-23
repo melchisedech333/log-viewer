@@ -34,7 +34,7 @@ onmessage = function(ev) {
  * Server control.
  */
 function client_connections (sock) {
-    // console.log(`${sock.remoteAddress}:${sock.remotePort} Connected`);
+    console.log(`${sock.remoteAddress}:${sock.remotePort} Connected`);
 
     sock.on('data',function(data){
         var request = {

@@ -4,7 +4,7 @@
  */
 
 var wk = null;
-var message_counter = 0;
+var message_counter = 1;
 
 // Initialization.
 $(document).ready(() => {
