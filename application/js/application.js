@@ -29,7 +29,9 @@ function process_worker (ev)
 {
     var request = ev.data;
 
-    console.log('request:', request);
+    if (request.cmd == 'log-data') {
+        console.log('log data:', request.data);
+    }
 }
 
 
