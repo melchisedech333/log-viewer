@@ -6,6 +6,7 @@
 #include <string.h> // strlen, memset
 #include <unistd.h> // sleep
 #include <time.h>   // time, localtime
+#include <stdlib.h> // malloc, free
 
 #define VERBUM_DEBUG_SERVER_PORT            1337
 #define VERBUM_DEBUG_R_ADDRESS              "127.0.0.1"
@@ -15,6 +16,8 @@
     do {                                                            \
         time_t now     = time(NULL);                                \
         struct tm *tms = localtime(&now);                           \
+        char *buffer   = NULL;                                      \
+        int size       = 0;                                         \
         char hour[5], min[5], sec[5];                               \
                                                                     \
         memset(hour, 0x0, 5);                                       \
@@ -32,13 +35,25 @@
         if (strlen(sec) == 1)                                       \
             sprintf(sec, "0%d",  tms->tm_sec);                      \
                                                                     \
-        if (DEBUG_FLAG == 1)                                        \
-            printf("[%s:%s:%s] -> %s:%d:%s(): " FMT "\n",           \
-                hour, min, sec,                                     \
-                __FILE__, __LINE__, __func__, ##__VA_ARGS__ );      \
-        else                                                        \
-            printf("[%s:%s:%s]: " FMT "\n",                         \
-                hour, min, sec, ##__VA_ARGS__ );                    \
+        size   = sizeof(char) * 4096;                               \
+        buffer = (char *) malloc(size);                             \
+                                                                    \
+        if (buffer) {                                               \
+            memset(buffer, 0, size);                                \
+                                                                    \
+            if (DEBUG_FLAG == 1)                                        \
+                sprintf(buffer, "[%s:%s:%s] -> %s:%d:%s(): " FMT "\n",           \
+                    hour, min, sec,                                     \
+                        __FILE__, __LINE__, __func__, ##__VA_ARGS__ );      \
+            else                                                        \
+                sprintf(buffer, "[%s:%s:%s]: " FMT "\n",                         \
+                    hour, min, sec, ##__VA_ARGS__ );                    \
+            \
+            verbum_debug_send_data(buffer); \
+            \
+            memset(buffer, 0, size); \
+            free(buffer); \
+        } \
     } while (0)
 
 #define say_ret(RET, FMT, ...)                                      \

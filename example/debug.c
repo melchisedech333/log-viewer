@@ -1,11 +1,11 @@
 
 #include "debug.h"
 
-#include <sys/socket.h>     // socket
-#include <netinet/in.h>     // struct sockaddr_in
-#include <arpa/inet.h>      // inet_pton
-#include <fcntl.h>          // fcntl
-#include <errno.h>          // errno
+#include <sys/socket.h> // socket
+#include <netinet/in.h> // struct sockaddr_in
+#include <arpa/inet.h>  // inet_pton
+#include <fcntl.h>      // fcntl
+#include <errno.h>      // errno
 
 /**
  * Send data to log viewer server.
