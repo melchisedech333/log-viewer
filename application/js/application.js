@@ -5,6 +5,7 @@
 
 var wk = null;
 var message_counter = 1;
+var message_counter_limit = 5000;
 
 // Initialization.
 $(document).ready(() => {
@@ -52,6 +53,9 @@ function process_worker (ev)
         message_counter++;
         
         process_log_data(request.data);
+
+        if (message_counter >= message_counter_limit)
+        window.interface.restart_application();
     }
 }
 
