@@ -1,7 +1,7 @@
 
 <div align='center'>
 
-<img src="images/app.png" >
+<img src="images/app.png" width="100%" >
 
 </div>
 
